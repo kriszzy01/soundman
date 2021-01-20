@@ -4,6 +4,7 @@ export const getPercentage = (currentTime: number, duration: number) => {
 };
 
 export const getSeconds = (value: number) => {
-  let result = value / 60;
-  return +result.toFixed(2);
+  return (
+    Math.floor(value / 60) + ":" + ("0" + Math.floor(value % 60)).slice(-2)
+  );
 };
