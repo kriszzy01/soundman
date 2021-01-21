@@ -1,12 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap");
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+:root {
+  --theme-bg: #000;
+  --theme-color: #fff;
+}
+
 body {
   overflow-x: hidden;
   line-height: 1.5;
+  max-width: 60rem;
+  min-height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  letter-spacing: 1px;
+  background-color: var(--theme-light);
+  scroll-behavior: smooth;
+  font-size: 1.5rem;
 }
 
 h1,
@@ -14,12 +30,53 @@ h2,
 h3,
 h4,
 ul {
+  font-family: "Reenie Beanie", cursive;
   margin: 0;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.1;
+}
+
+h3 {
+  font-size: 1.3rem;
+  margin-top: 1rem;
+}
+
 ul {
-  padding: 0;
+  padding: 0 ;
   list-style: none;
+  background-color: white;
+  min-width: 50%;
+  max-width: 260px;
+  height: 100%;
+  transform: translateX(-100%);
+  transition: transform 0.2s cubic-bezier(0.47, 0, 0.745, 0.715);
+  overflow-y: scroll;
+}
+
+img {
+  max-width: 100%;
+}
+
+li {
+  display: flex;
+  padding: 1rem;
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
+}
+
+li:hover,
+li:focus {
+  background-color: blanchedalmond;
+}
+
+li img {
+  height: 4rem;
+  margin-right: 1rem;
 }
 
 [type="button"] {
@@ -35,12 +92,41 @@ ul {
   filter: drop-shadow(0 0 3px black);
 }
 
+[data-type="toggle"] {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 2.5rem;
+  height: 1.25rem;
+  padding: 0.125rem;
+  background-color: lightblue;
+  border-radius: 10px;
+}
+
+[data-type="toggle"] > span {
+  height: 16px;
+}
+
+[data-type="toggle"] > .toggle__thumb {
+  position: absolute;
+  top: 50%;
+  left: 0.125rem;
+  transform: translateY(-50%);
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: black;
+  pointer-events: none;
+}
+
 [data-type="range"] {
   position: relative;
-  width: 200px;
+  width: 100%;
   height: 1rem;
+  margin: 0 1rem;
   cursor: pointer;
-  background-color: rgba(0,0,0,.9);
+  background-color: rgba(0, 0, 0, 0.9);
   border-radius: 1rem;
   overflow: hidden;
   display: flex;
@@ -74,7 +160,111 @@ ul {
   clip: rect(1px, 1px, 1px, 1px);
 }
 
-svg {
-  height: 28px;
-  width: 28px;
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.player__nowPlaying {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.player__nowPlaying img {
+  max-width: 16rem;
+  max-height: 16rem;
+  border-radius: 50%;
+  margin-bottom: 2rem;
+}
+
+.player__indicator {
+  width: 70%;
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.player__controls {
+  width: 70%;
+  display: inline-flex;
+  justify-content: space-around;
+}
+
+.playing {
+  animation: pulse cubic-bezier(0.47, 0, 0.745, 0.715) 3s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 2rem rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav > * + * {
+  margin-left: 1rem;
+}
+
+[data-showTracks] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+
+[data-showTracks]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+  opacity: 0;
+}
+
+[data-showTracks="true"] {
+  pointer-events: visible;
+}
+
+[data-showTracks="true"]:before {
+  opacity: 1;
+}
+
+[data-showTracks="true"] ul {
+  transform: translateX(0);
+}
+
+[data-showTracks] [type="button"] {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
