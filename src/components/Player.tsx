@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
+import { Song } from "../types";
+import { data } from "../utils";
 
 import { ReactComponent as Pause } from "../assets/pause.svg";
 import { ReactComponent as Play } from "../assets/play.svg";
@@ -17,6 +19,9 @@ interface PlayerProps {
   isPlaying: boolean;
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
   setSongInfo: React.Dispatch<React.SetStateAction<SongInfo>>;
+  setNowPlaying: React.Dispatch<React.SetStateAction<Song>>;
+  nowPlaying: Song;
+  currentSongId: string;
   songInfo: SongInfo;
 }
 
@@ -26,6 +31,9 @@ export const Player: React.FC<PlayerProps> = ({
   setIsPlaying,
   songInfo,
   setSongInfo,
+  setNowPlaying,
+  currentSongId,
+  nowPlaying,
 }) => {
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
@@ -43,11 +51,37 @@ export const Player: React.FC<PlayerProps> = ({
     }
   };
 
+  const handleChangeSong = async (direction: string) => {
+    let id = data.findIndex((data) => data.id === currentSongId);
+
+    if (direction === "next") {
+      let nextSong = data[(id + 1) % data.length];
+      await setNowPlaying(nextSong);
+    } else if (direction === "prev") {
+      let prevSong = data[(id - 1) % data.length] || data[data.length - 1];
+      await setNowPlaying(prevSong);
+    }
+
+    if (isPlaying) audioRef.current?.play();
+  };
+
+  const handleShuffleSong = () => {};
+
   const { currentTime, duration } = songInfo;
 
   return (
     <>
-      <div>
+      <div className="player__nowPlaying">
+        <img
+          src={nowPlaying.cover}
+          alt={nowPlaying.alt}
+          className={isPlaying ? "playing" : ""}
+        />
+        <h2>{nowPlaying.name}</h2>
+        <h3>{nowPlaying.artist}</h3>
+      </div>
+
+      <div className="player__indicator">
         <span>{getSeconds(currentTime)}</span>
 
         <div data-type="range">
@@ -70,8 +104,8 @@ export const Player: React.FC<PlayerProps> = ({
         <span>{getSeconds(duration)}</span>
       </div>
 
-      <div>
-        <button type="button">
+      <div className="player__controls">
+        <button type="button" onClick={() => handleChangeSong("prev")}>
           <Prev />
           <span className="vh">Previous Music</span>
         </button>
@@ -81,7 +115,7 @@ export const Player: React.FC<PlayerProps> = ({
           <span className="vh">{isPlaying ? "Pause Music" : "Play Music"}</span>
         </button>
 
-        <button type="button">
+        <button type="button" onClick={() => handleChangeSong("next")}>
           <Next />
           <span className="vh">Next Music</span>
         </button>
