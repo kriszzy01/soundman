@@ -93,7 +93,11 @@ const App: React.FC = () => {
         >
           <ul>
             {data.map((song) => (
-              <li key={song.id} onClick={() => handleNextSong("", song.id)}>
+              <li
+                key={song.id}
+                onClick={() => handleNextSong("", song.id)}
+                className={nowPlaying.id === song.id ? "selected" : ""}
+              >
                 <img src={song.cover} alt={song.alt} />
                 <div>
                   <span>{song.name}</span> <br />
