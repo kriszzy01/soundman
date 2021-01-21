@@ -104,10 +104,9 @@ export const Player: React.FC<PlayerProps> = ({
         <span>{getSeconds(duration)}</span>
       </div>
 
-      <div className="player__controls">
+      <div className="player__controls" aria-label="Previous Music">
         <button type="button" onClick={() => handleChangeSong("prev")}>
           <Prev />
-          <span className="vh">Previous Music</span>
         </button>
 
         <button type="button" onClick={handlePlayPause}>
@@ -115,9 +114,12 @@ export const Player: React.FC<PlayerProps> = ({
           <span className="vh">{isPlaying ? "Pause Music" : "Play Music"}</span>
         </button>
 
-        <button type="button" onClick={() => handleChangeSong("next")}>
+        <button
+          type="button"
+          aria-label="Next Music"
+          onClick={() => handleChangeSong("next")}
+        >
           <Next />
-          <span className="vh">Next Music</span>
         </button>
       </div>
     </>
