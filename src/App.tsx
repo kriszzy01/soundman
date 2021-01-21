@@ -3,8 +3,7 @@ import { Player } from "./components/Player";
 import { data } from "./utils";
 
 import { ReactComponent as Library } from "./assets/songs.svg";
-import { ReactComponent as Moon } from "./assets/moon.svg";
-import { ReactComponent as Sun } from "./assets/sun.svg";
+import { ToggleButton } from "./components/ToggleButton";
 
 const App: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -25,9 +24,9 @@ const App: React.FC = () => {
   };
 
   const handleNextSong = async (_: any, selectedId?: string) => {
-    let p = selectedId ? selectedId : nowPlaying.id;
+    let songId = selectedId ? selectedId : nowPlaying.id;
 
-    let id = data.findIndex((data) => data.id === p);
+    let id = data.findIndex((data) => data.id === songId);
     let nextSong = data[(id + 1) % data.length];
     await setNowPlaying(nextSong);
 
@@ -46,17 +45,11 @@ const App: React.FC = () => {
       <header>
         <h1>SoundMan</h1>
         <nav>
-          <button type="button" data-type="toggle" role="switch">
-            <span>
-              <Sun />
-            </span>
-            <div className="toggle__thumb"></div>
-            <span>
-              <Moon />
-            </span>
-          </button>
+          <ToggleButton />
+
           <button
             type="button"
+            aria-label="view library"
             aria-controls="tracks"
             aria-expanded={showTracks}
             onClick={() => {
@@ -96,6 +89,7 @@ const App: React.FC = () => {
           ref={trackRef}
           id="tracks"
           aria-label="all tracks"
+          onClick={() => setShowTracks(!showTracks)}
         >
           <ul>
             {data.map((song) => (
@@ -107,9 +101,6 @@ const App: React.FC = () => {
                 </div>
               </li>
             ))}
-            <button type="button" onClick={() => setShowTracks(false)}>
-              close
-            </button>
           </ul>
         </aside>
       </main>
