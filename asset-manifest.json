@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/soundman/static/css/main.dc11538c.chunk.css",
-    "main.js": "/soundman/static/js/main.db6359b0.chunk.js",
-    "main.js.map": "/soundman/static/js/main.db6359b0.chunk.js.map",
+    "main.css": "/soundman/static/css/main.5381582e.chunk.css",
+    "main.js": "/soundman/static/js/main.51f2f77f.chunk.js",
+    "main.js.map": "/soundman/static/js/main.51f2f77f.chunk.js.map",
     "runtime-main.js": "/soundman/static/js/runtime-main.85490490.js",
     "runtime-main.js.map": "/soundman/static/js/runtime-main.85490490.js.map",
-    "static/js/2.3855cad1.chunk.js": "/soundman/static/js/2.3855cad1.chunk.js",
-    "static/js/2.3855cad1.chunk.js.map": "/soundman/static/js/2.3855cad1.chunk.js.map",
+    "static/js/2.f1d54ced.chunk.js": "/soundman/static/js/2.f1d54ced.chunk.js",
+    "static/js/2.f1d54ced.chunk.js.map": "/soundman/static/js/2.f1d54ced.chunk.js.map",
     "index.html": "/soundman/index.html",
-    "static/css/main.dc11538c.chunk.css.map": "/soundman/static/css/main.dc11538c.chunk.css.map",
-    "static/js/2.3855cad1.chunk.js.LICENSE.txt": "/soundman/static/js/2.3855cad1.chunk.js.LICENSE.txt",
+    "static/css/main.5381582e.chunk.css.map": "/soundman/static/css/main.5381582e.chunk.css.map",
+    "static/js/2.f1d54ced.chunk.js.LICENSE.txt": "/soundman/static/js/2.f1d54ced.chunk.js.LICENSE.txt",
     "static/media/moon.90b3b021.svg": "/soundman/static/media/moon.90b3b021.svg",
     "static/media/next.2eb5cb24.svg": "/soundman/static/media/next.2eb5cb24.svg",
     "static/media/pause.87718724.svg": "/soundman/static/media/pause.87718724.svg",
@@ -20,8 +20,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.85490490.js",
-    "static/js/2.3855cad1.chunk.js",
-    "static/css/main.dc11538c.chunk.css",
-    "static/js/main.db6359b0.chunk.js"
+    "static/js/2.f1d54ced.chunk.js",
+    "static/css/main.5381582e.chunk.css",
+    "static/js/main.51f2f77f.chunk.js"
   ]
 }
