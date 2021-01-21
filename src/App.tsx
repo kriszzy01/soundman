@@ -2,8 +2,13 @@ import React, { useRef, useState } from "react";
 import { Player } from "./components/Player";
 import { data } from "./utils";
 
+import { ReactComponent as Library } from "./assets/songs.svg";
+import { ReactComponent as Moon } from "./assets/moon.svg";
+import { ReactComponent as Sun } from "./assets/sun.svg";
+
 const App: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showTracks, setShowTracks] = useState(false);
   const [nowPlaying, setNowPlaying] = useState(data[0]);
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
@@ -19,20 +24,48 @@ const App: React.FC = () => {
     });
   };
 
-  const handleSongEnd = async () => {
-    let id = data.findIndex((data) => data.id === nowPlaying.id);
+  const handleNextSong = async (_: any, selectedId?: string) => {
+    let p = selectedId ? selectedId : nowPlaying.id;
+
+    let id = data.findIndex((data) => data.id === p);
     let nextSong = data[(id + 1) % data.length];
     await setNowPlaying(nextSong);
+
     if (isPlaying) audioRef.current?.play();
+
+    if (!isPlaying && selectedId) {
+      setIsPlaying(true);
+      audioRef.current?.play();
+    }
   };
+
+  const trackRef = useRef<HTMLElement>(null);
 
   return (
     <>
       <header>
         <h1>SoundMan</h1>
         <nav>
-          <button>Music List</button>
-          <button>Dark Mode</button>
+          <button type="button" data-type="toggle" role="switch">
+            <span>
+              <Sun />
+            </span>
+            <div className="toggle__thumb"></div>
+            <span>
+              <Moon />
+            </span>
+          </button>
+          <button
+            type="button"
+            aria-controls="tracks"
+            aria-expanded={showTracks}
+            onClick={() => {
+              setShowTracks(true);
+              trackRef.current?.focus();
+            }}
+          >
+            <Library />
+          </button>
         </nav>
       </header>
 
@@ -43,7 +76,7 @@ const App: React.FC = () => {
             ref={audioRef}
             onLoadedMetadata={handleMetaData}
             onTimeUpdate={handleMetaData}
-            onEnded={handleSongEnd}
+            onEnded={handleNextSong}
           ></audio>
 
           <Player
@@ -58,17 +91,25 @@ const App: React.FC = () => {
           />
         </section>
 
-        <aside>
+        <aside
+          data-showTracks={showTracks}
+          ref={trackRef}
+          id="tracks"
+          aria-label="all tracks"
+        >
           <ul>
             {data.map((song) => (
-              <li>
-                <img src={nowPlaying.cover} alt={nowPlaying.alt} />
+              <li key={song.id} onClick={() => handleNextSong("", song.id)}>
+                <img src={song.cover} alt={song.alt} />
                 <div>
-                  <span>{song.name}</span>
+                  <span>{song.name}</span> <br />
                   <span>{song.artist}</span>
                 </div>
               </li>
             ))}
+            <button type="button" onClick={() => setShowTracks(false)}>
+              close
+            </button>
           </ul>
         </aside>
       </main>
