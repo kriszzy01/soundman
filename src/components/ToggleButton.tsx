@@ -21,7 +21,6 @@ export const ToggleButton: React.FC = () => {
       data-type="toggle"
       role="switch"
       aria-label="dark mode"
-      aria-pressed={toggle}
       aria-checked={toggle}
       onClick={() => setToggle((toggle) => !toggle)}
     >

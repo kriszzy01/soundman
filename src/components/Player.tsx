@@ -85,6 +85,9 @@ export const Player: React.FC<PlayerProps> = ({
         <span>{getSeconds(currentTime)}</span>
 
         <div data-type="range">
+          <label className="vh" htmlFor="range">
+            Song Progress
+          </label>
           <input
             type="range"
             id="range"
@@ -104,8 +107,12 @@ export const Player: React.FC<PlayerProps> = ({
         <span>{getSeconds(duration)}</span>
       </div>
 
-      <div className="player__controls" aria-label="Previous Music">
-        <button type="button" onClick={() => handleChangeSong("prev")}>
+      <div className="player__controls">
+        <button
+          type="button"
+          onClick={() => handleChangeSong("prev")}
+          aria-label="Previous Music"
+        >
           <Prev />
         </button>
 
