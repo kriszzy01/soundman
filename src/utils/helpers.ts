@@ -8,3 +8,7 @@ export const getSeconds = (value: number) => {
     Math.floor(value / 60) + ":" + ("0" + Math.floor(value % 60)).slice(-2)
   );
 };
+
+export const getRandomNumber = (limit: number) => {
+  return Math.floor(Math.random() * (limit + 1));
+};
