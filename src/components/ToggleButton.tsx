@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ReactComponent as Sun } from "../assets/sun.svg";
 import { ReactComponent as Moon } from "../assets/moon.svg";
+import { useDarkMode } from "../hooks";
 
 export const ToggleButton: React.FC = () => {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useDarkMode(false);
 
   useEffect(() => {
     if (toggle) {
