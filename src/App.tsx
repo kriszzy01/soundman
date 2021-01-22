@@ -98,7 +98,7 @@ const App: React.FC = () => {
         </section>
 
         <aside
-          data-showTracks={showTracks}
+          data-showtracks={showTracks}
           ref={trackRef}
           id="tracks"
           aria-label="all tracks"

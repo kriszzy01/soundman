@@ -262,7 +262,7 @@ nav > * + * {
   pointer-events: none;
 }
 
-[data-showTracks]::before {
+[data-showracks]::before {
   content: "";
   position: absolute;
   top: 0;
@@ -274,14 +274,14 @@ nav > * + * {
   opacity: 0;
 }
 
-[data-showTracks="true"] {
+[data-showtracks="true"] {
   pointer-events: visible;
 }
 
-[data-showTracks="true"]:before {
+[data-showtracks="true"]:before {
   opacity: 1;
 }
 
-[data-showTracks="true"] ul {
+[data-showtracks="true"] ul {
   transform: translateX(0);
 }
