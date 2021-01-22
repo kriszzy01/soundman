@@ -1,13 +1,15 @@
 import React, { useRef, useState } from "react";
 import { Player } from "./components/Player";
-import { data } from "./utils";
+import { data, getRandomNumber } from "./utils";
 
 import { ReactComponent as Library } from "./assets/songs.svg";
 import { ToggleButton } from "./components/ToggleButton";
+import { Song } from "./types";
 
 const App: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTracks, setShowTracks] = useState(false);
+  const [shuffle, setShuffle] = useState(false);
   const [nowPlaying, setNowPlaying] = useState(data[0]);
   const [songInfo, setSongInfo] = useState({
     currentTime: 0,
@@ -27,7 +29,16 @@ const App: React.FC = () => {
     let songId = selectedId ? selectedId : nowPlaying.id;
 
     let id = data.findIndex((data) => data.id === songId);
-    let nextSong = data[(id + 1) % data.length];
+
+    let nextSong: Song;
+    if (selectedId) {
+      nextSong = data[id]; //set now playing to the selected song
+    } else if (shuffle && !selectedId) {
+      nextSong = data[getRandomNumber(data.length)]; //Set the now playing to a randomly chosen song
+    } else {
+      nextSong = data[(id + 1) % data.length]; //Set now playing to the next song on the list
+    }
+
     await setNowPlaying(nextSong);
 
     if (isPlaying) audioRef.current?.play();
@@ -81,6 +92,8 @@ const App: React.FC = () => {
             setNowPlaying={setNowPlaying}
             currentSongId={nowPlaying.id}
             nowPlaying={nowPlaying}
+            setShuffle={setShuffle}
+            shuffle={shuffle}
           />
         </section>
 

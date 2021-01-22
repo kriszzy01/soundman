@@ -29,7 +29,7 @@ body {
 
 [data-theme="dark"] {
   --theme-bg: #000;
-  --theme-color: #fff;
+  --theme-color: lightblue;
 }
 
 h1,
@@ -78,7 +78,7 @@ li {
 }
 
 li:hover,
-li:focus, 
+li:focus,
 .selected {
   background-color: grey;
 }
@@ -88,7 +88,8 @@ li img {
   margin-right: 1rem;
 }
 
-svg path, svg g {
+svg path,
+svg g {
   fill: var(--theme-color);
 }
 
@@ -102,7 +103,12 @@ svg path, svg g {
 [type="button"]:focus,
 [type="button"]:hover {
   outline: none;
-  filter: drop-shadow(0 0 3px black);
+  filter: drop-shadow(0 0 3px var(--theme-color));
+}
+
+[type="button"].selected {
+  outline: 0.125rem dotted var(--theme-color);
+  box-shadow: 0 0 5px 0 var(--theme-color);
 }
 
 [data-type="toggle"] {
@@ -218,17 +224,17 @@ svg path, svg g {
 @keyframes pulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 0 0 rgba(176, 213, 230, 0.7);
   }
 
   50% {
     transform: scale(1.1);
-    box-shadow: 0 0 0 2rem rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 2rem rgba(176, 213, 230, 0);
   }
 
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(176, 213, 230, 0);
   }
 }
 
