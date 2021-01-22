@@ -1,6 +1,6 @@
 import React from "react";
 import { Song } from "../types";
-import { data } from "../utils";
+import { data, getRandomNumber } from "../utils";
 
 import { ReactComponent as Pause } from "../assets/pause.svg";
 import { ReactComponent as Play } from "../assets/play.svg";
@@ -59,11 +59,14 @@ export const Player: React.FC<PlayerProps> = ({
   const handleChangeSong = async (direction: string) => {
     let id = data.findIndex((data) => data.id === currentSongId);
 
+    let shuffledSong = shuffle ? data[getRandomNumber(data.length)] : null;
+
     if (direction === "next") {
-      let nextSong = data[(id + 1) % data.length];
+      let nextSong = shuffledSong || data[(id + 1) % data.length];
       await setNowPlaying(nextSong);
     } else if (direction === "prev") {
-      let prevSong = data[(id - 1) % data.length] || data[data.length - 1];
+      let prevSong =
+        shuffledSong || data[(id - 1) % data.length] || data[data.length - 1];
       await setNowPlaying(prevSong);
     }
 
