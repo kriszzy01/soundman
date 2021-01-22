@@ -6,6 +6,7 @@ import { ReactComponent as Pause } from "../assets/pause.svg";
 import { ReactComponent as Play } from "../assets/play.svg";
 import { ReactComponent as Next } from "../assets/next.svg";
 import { ReactComponent as Prev } from "../assets/prev.svg";
+import { ReactComponent as Shuffle } from "../assets/shuffle.svg";
 
 import { getPercentage, getSeconds } from "../utils";
 
@@ -23,6 +24,8 @@ interface PlayerProps {
   nowPlaying: Song;
   currentSongId: string;
   songInfo: SongInfo;
+  setShuffle: React.Dispatch<React.SetStateAction<boolean>>;
+  shuffle: boolean;
 }
 
 export const Player: React.FC<PlayerProps> = ({
@@ -34,6 +37,8 @@ export const Player: React.FC<PlayerProps> = ({
   setNowPlaying,
   currentSongId,
   nowPlaying,
+  setShuffle,
+  shuffle,
 }) => {
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
@@ -64,8 +69,6 @@ export const Player: React.FC<PlayerProps> = ({
 
     if (isPlaying) audioRef.current?.play();
   };
-
-  const handleShuffleSong = () => {};
 
   const { currentTime, duration } = songInfo;
 
@@ -127,6 +130,15 @@ export const Player: React.FC<PlayerProps> = ({
           onClick={() => handleChangeSong("next")}
         >
           <Next />
+        </button>
+
+        <button
+          type="button"
+          aria-label="Shuffle Music"
+          className={shuffle ? "selected" : ""}
+          onClick={() => setShuffle((shuffle) => !shuffle)}
+        >
+          <Shuffle />
         </button>
       </div>
     </>
