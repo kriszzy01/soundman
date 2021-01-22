@@ -10,5 +10,5 @@ export const getSeconds = (value: number) => {
 };
 
 export const getRandomNumber = (limit: number) => {
-  return Math.floor(Math.random() * (limit + 1));
+  return Math.floor(Math.random() * limit);
 };
