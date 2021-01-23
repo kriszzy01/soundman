@@ -1,14 +1,12 @@
 import React from "react";
 import { Song } from "../types";
-import { data, getRandomNumber } from "../utils";
+import { data, getRandomNumber, getPercentage, getSeconds } from "../utils";
 
 import { ReactComponent as Pause } from "../assets/pause.svg";
 import { ReactComponent as Play } from "../assets/play.svg";
 import { ReactComponent as Next } from "../assets/next.svg";
 import { ReactComponent as Prev } from "../assets/prev.svg";
 import { ReactComponent as Shuffle } from "../assets/shuffle.svg";
-
-import { getPercentage, getSeconds } from "../utils";
 
 type SongInfo = {
   currentTime: number;
